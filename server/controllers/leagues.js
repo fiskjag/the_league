@@ -21,7 +21,7 @@ exports.league = function(req, res, next, id) {
 };
 
 /**
- * Create an league
+ * Create a league
  */
 exports.create = function(req, res) {
     var league = new League(req.body);
@@ -40,7 +40,7 @@ exports.create = function(req, res) {
 };
 
 /**
- * Update an league
+ * Update a league
  */
 exports.update = function(req, res) {
     var league = req.league;
@@ -60,7 +60,7 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an league
+ * Delete a league
  */
 exports.destroy = function(req, res) {
     var league = req.league;
