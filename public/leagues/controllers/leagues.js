@@ -128,7 +128,7 @@ angular.module('mean.leagues').controller('LeaguesController', ['$scope', '$stat
         team.players.push({_id: player, name: player});
 
         league.$update(function() {
-            $location.path('leagues/' + league._id + '/groups/' + group._id + '/teams/' + team._id + '/players/' + player._id);
+            $location.path('leagues/' + league._id + '/groups/' + group._id + '/teams/' + team._id); // + '/players/' + player._id);
         });
     };
 

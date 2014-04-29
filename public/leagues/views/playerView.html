@@ -1,0 +1,8 @@
+<section data-ng-controller="LeaguesController" data-ng-init="findOnePlayer()">
+    <div>
+        <a data-ng-href="#!/leagues/{{league._id}}">Liga: {{league.name}}</a>
+        <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}">Grupp: {{group.name}}</a>
+        <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}">Lag: {{team.name}}</a>
+        Spelare: {{player.name}}
+    </div>
+</section>

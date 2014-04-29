@@ -1,5 +1,8 @@
 <section data-ng-controller="LeaguesController" data-ng-init="findOneGroup()">
-    <div>Liga: {{league.name}}, grupp: {{group.name}}</div>
+    <div>
+        <a data-ng-href="#!/leagues/{{league._id}}">Liga: {{league.name}}</a>
+        Grupp: {{group.name}}
+    </div>
     <!-- <div data-ng-show="global.user._id == league.user._id">
         <a class="btn" href="/#!/leagues/{{league._id}}/edit">
             <i class="glyphicon glyphicon-edit"></i>
