@@ -1,0 +1,26 @@
+<section data-ng-controller="LeaguesController" data-ng-init="findOneTeam()">
+    <div>Liga: {{league.name}}, grupp: {{group.name}}, lag: {{team.name}} </div>
+    <!-- <div>{{team}} -->
+    <!-- <div data-ng-show="global.user._id == league.user._id">
+        <a class="btn" href="/#!/leagues/{{league._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div> -->
+
+    <div data-ng-show="!team.players || team.players.length">
+        <div ng-repeat="player in team.playerss">
+            <div>
+                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/players/{{player._id}}">{{player}}</a>
+            </div>
+        </div>
+        <a class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/createPlayer">
+            <i class="glyphicon glyphicon-plus"></i>
+        </a>
+    </div>
+    <div data-ng-hide="!team.players || team.players.length">No players yet. 
+        <br> Why don't you <a href="/#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/createPlayer">Create One</a>?
+    </div>
+</section>
