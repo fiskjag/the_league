@@ -1,25 +1,25 @@
 <section data-ng-controller="LeaguesController" data-ng-init="findOneGroup()">
-    {{group}}
+    <div>Liga: {{league.name}}, grupp: {{group.name}}</div>
     <!-- <div data-ng-show="global.user._id == league.user._id">
         <a class="btn" href="/#!/leagues/{{league._id}}/edit">
-        	<i class="glyphicon glyphicon-edit"></i>
+            <i class="glyphicon glyphicon-edit"></i>
         </a>
         <a class="btn" data-ng-click="remove();">
             <i class="glyphicon glyphicon-trash"></i>
         </a>
-    </div>
+    </div> -->
 
-    <div data-ng-show="!league.groups || league.groups.length">
-        <div ng-repeat="group in league.groups">
+    <div data-ng-show="!group.teams || group.teams.length">
+        <div ng-repeat="team in group.teams">
             <div>
-                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}">{{group}}</a>
+                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}">{{team}}</a>
             </div>
         </div>
-        <a class="btn" data-ng-click="createGroup();">
+        <a class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">
             <i class="glyphicon glyphicon-plus"></i>
         </a>
     </div>
-	<div data-ng-hide="!league.groups || league.groups.length">No groups yet. 
-		<br> Why don't you <a href="/#!/leagues/{{league._id}}/createGroup">Create One</a>?
-	</div> -->
+    <div data-ng-hide="!group.teams || group.teams.length">No teams yet. 
+        <br> Why don't you <a href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">Create One</a>?
+    </div>
 </section>

@@ -25,6 +25,7 @@ describe('<Unit Test>', function() {
 
             user.save(function() {
                 league = new League({
+                    _id: 'League name',    
                     name: 'League name',
                     user: user
                 });

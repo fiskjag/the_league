@@ -81,7 +81,6 @@ exports.destroy = function(req, res) {
  * Show a league
  */
 exports.show = function(req, res) {
-    console.log('show');
     res.jsonp(req.league);
 };
 

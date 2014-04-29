@@ -51,6 +51,7 @@
 
                     // test expected GET request
                     $httpBackend.expectGET('leagues').respond([{
+                        _id: 'SL 2014',
                         name: 'SL 2014'
                     }]);
 
@@ -60,6 +61,7 @@
 
                     // test scope value
                     expect(scope.leagues).toEqualData([{
+                        _id: 'SL 2014',
                         name: 'SL 2014'
                     }]);
 
@@ -73,6 +75,7 @@
                     // fixture response object
                     var testLeagueData = function() {
                         return {
+                            _id: 'SL 2014',
                             name: 'SL 2014'
                         };
                     };
@@ -130,7 +133,7 @@
                 // fixture rideshare
                 var putLeagueData = function() {
                     return {
-                        _id: '525a8422f6d0f87f0e407a33',
+                        _id: 'SL 2014',
                         name: 'SL 2014'
                     };
                 };
@@ -142,7 +145,9 @@
                 scope.league = league;
 
                 // test PUT happens correctly
-                $httpBackend.expectPUT(/leagues\/([0-9a-fA-F]{24})$/).respond();
+                //$httpBackend.expectPUT(/leagues\/([0-9a-fA-F]{24})$/).respond();
+                $httpBackend.expectPUT('leagues/SL%202014').respond();
+
 
                 // testing the body data is out for now until an idea for testing the dynamic updated array value is figured out
                 //$httpBackend.expectPUT(/leagues\/([0-9a-fA-F]{24})$/, putLeagueData()).respond();

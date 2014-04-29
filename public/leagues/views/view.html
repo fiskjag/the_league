@@ -1,13 +1,13 @@
 <section data-ng-controller="LeaguesController" data-ng-init="findOne()">
-    <h2>{{league.name}}</h2>
-    <div data-ng-show="global.user._id == league.user._id">
+    <div>Liga: {{league.name}}</div>
+    <!-- <div data-ng-show="global.user._id == league.user._id">
         <a class="btn" href="/#!/leagues/{{league._id}}/edit">
         	<i class="glyphicon glyphicon-edit"></i>
         </a>
         <a class="btn" data-ng-click="remove();">
             <i class="glyphicon glyphicon-trash"></i>
         </a>
-    </div>
+    </div> -->
 
     <div data-ng-show="!league.groups || league.groups.length">
         <div ng-repeat="group in league.groups">

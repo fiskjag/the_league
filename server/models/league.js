@@ -11,17 +11,27 @@ var mongoose = require('mongoose'),
  * League Schema
  */
 var LeagueSchema = new Schema({
+    // _id: {
+    //     type: Number,
+    //     trim: false,
+    //     required: true
+    // },
     name: {
         type: String,
-        default: '',
-        trim: true
+        trim: true,
+        required: true
     },
     groups: [
         {
+            _id: {
+                type: String,
+                trim: false,
+                required: true
+            },
             name: {
                 type: String,
-                default: '',
-                trim: true
+                trim: true,
+                required: true
             },
             matches: [
                 {
@@ -48,15 +58,18 @@ var LeagueSchema = new Schema({
                         default: 0
                     },  
                 }
-            ]
-        },
-        {
+            ],
             teams: [
                 {
+                    _id: {
+                        type: String,
+                        trim: true,
+                        required: true
+                    },
                     name: {
                         type: String,
-                        default: '',
-                        trim: true
+                        trim: true,
+                        required: true
                     },
                     gamesplayed: {
                         type: Number,
@@ -88,6 +101,11 @@ var LeagueSchema = new Schema({
                     },
                     players: [
                         {
+                            _id: {
+                                type: String,
+                                trim: true,
+                                required: true
+                            },
                             name: {
                                 type: String,
                                 default: '',

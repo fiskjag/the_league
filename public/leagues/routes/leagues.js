@@ -53,7 +53,7 @@ angular.module('mean.leagues').config(['$stateProvider',
                     loggedin: checkLoggedin
                 }
             })
-            .state('league by id', {
+            .state('league by id', { // list groups in league here
                 url: '/leagues/:leagueId',
                 templateUrl: 'public/leagues/views/view.html',
                 resolve: {
@@ -63,13 +63,13 @@ angular.module('mean.leagues').config(['$stateProvider',
             // ---------------------- END LEAGUE ROUTES ----------------------
 
             // ---------------------- START GROUP ROUTES ---------------------
-            .state('all groups', {
-                url: '/leagues/:leagueId/groups',
-                templateUrl: 'public/leagues/views/groupsList.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
-            })
+            // .state('all groups', {
+            //     url: '/leagues/:leagueId/groups',
+            //     templateUrl: 'public/leagues/views/groupsList.html',
+            //     resolve: {
+            //         loggedin: checkLoggedin
+            //     }
+            // })
             .state('create group', {
                 url: '/leagues/:leagueId/createGroup',
                 templateUrl: 'public/leagues/views/groupCreate.html',
@@ -77,7 +77,7 @@ angular.module('mean.leagues').config(['$stateProvider',
                     loggedin: checkLoggedin
                 }
             })
-            .state('group', {
+            .state('group', { // list teams in group here
                 url: '/leagues/:leagueId/groups/:groupId',
                 templateUrl: 'public/leagues/views/groupView.html',
                 resolve: {
