@@ -67,7 +67,7 @@ angular.module('mean.leagues').controller('LeaguesController', ['$scope', '$stat
         league.groups.push({_id: group, name: group});
 
         league.$update(function() {
-            $location.path('leagues/' + league._id + '/groups/' + group._id);
+            $location.path('leagues/' + league._id + '/groups/' + group);
         });
     };
 
@@ -84,18 +84,18 @@ angular.module('mean.leagues').controller('LeaguesController', ['$scope', '$stat
             $scope.group = $filter('filter')(groups, {_id: groupId})[0];
         });
     };
-    // --------------------------- END LEAGUE ----------------------------------------
+    // --------------------------- END GROUP ----------------------------------------
 
     // --------------------------- START TEAM ----------------------------------------
     $scope.createTeam = function() {
         var league = $scope.league;
         var group = $scope.group;
         var team = $scope.team;
-        
+
         group.teams.push({_id: team, name: team});
 
         league.$update(function() {
-            $location.path('leagues/' + league._id + '/groups/' + group._id + '/teams/' + team._id);
+            $location.path('leagues/' + league._id + '/groups/' + group._id + '/teams/' + team);
         });
     };
 

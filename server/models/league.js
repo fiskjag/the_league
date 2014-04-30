@@ -11,11 +11,11 @@ var mongoose = require('mongoose'),
  * League Schema
  */
 var LeagueSchema = new Schema({
-    // _id: {
-    //     type: Number,
-    //     trim: false,
-    //     required: true
-    // },
+    _id: {
+        type: String,
+        trim: false,
+        required: true
+    },
     name: {
         type: String,
         trim: true,
@@ -63,7 +63,7 @@ var LeagueSchema = new Schema({
                 {
                     _id: {
                         type: String,
-                        trim: true,
+                        trim: false,
                         required: true
                     },
                     name: {
@@ -103,7 +103,7 @@ var LeagueSchema = new Schema({
                         {
                             _id: {
                                 type: String,
-                                trim: true,
+                                trim: false,
                                 required: true
                             },
                             name: {

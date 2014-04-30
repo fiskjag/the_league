@@ -26,6 +26,7 @@ exports.league = function(req, res, next, id) {
 exports.create = function(req, res) {
     var league = new League(req.body);
     league.user = req.user;
+    league._id = league.name;
 
     league.save(function(err) {
         if (err) {
