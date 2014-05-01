@@ -154,4 +154,37 @@ angular.module('mean.leagues').controller('LeaguesController', ['$scope', '$stat
         });
     };
     // --------------------------- END PLAYER ------------------------------------------
+
+    // --------------------------- START MATCHES ---------------------------------------
+    $scope.generateMatches = function() {
+        var leagueId = $stateParams.leagueId;
+        var groupId = $stateParams.groupId;
+        console.log('Genererar matcher för grupp ' + groupId);
+
+        Leagues.get({
+            leagueId: leagueId
+        }, function(league) {
+            $scope.league = league;
+
+            var groups = league.groups;
+            $scope.group = $filter('filter')(groups, {_id: groupId})[0];
+
+            var teams = $scope.group.teams;
+            var matches = $scope.group.matches;
+
+            for(var i = 0; i < teams.length; i++) {
+                var hometeam = teams[i];
+                
+                for(var j = i+1; j < teams.length; j++) {
+                    var awayteam = teams[j];
+
+                    if(hometeam !== awayteam) {
+                        matches.push({hometeam: hometeam, awayteam: awayteam});
+                        console.log(hometeam.name + ' vs ' + awayteam.name);
+                    }
+                }
+            }
+        });
+    };
+    // --------------------------- END MATCHES -----------------------------------------
 }]);

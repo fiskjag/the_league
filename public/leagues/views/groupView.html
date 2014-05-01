@@ -25,4 +25,19 @@
     <div data-ng-hide="!group.teams || group.teams.length">No teams yet. 
         <br> Why don't you <a href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">Create One</a>?
     </div>
+
+    <div data-ng-show="!group.matches || group.matches.length">
+        <div ng-repeat="match in group.matches">
+            <div>
+                {{match.hometeam}} - {{match.awayteam}}
+            </div>
+        </div>
+    </div>
+    
+    <div data-ng-show="!group.teams || group.teams.length > 1">
+        <div data-ng-hide="!group.matches || group.matches.length">Inga matcher skapade</div>
+        <form data-ng-submit="generateMatches()">
+            <button type="submit" class="btn btn-info">Generera matcher</button>
+        </form>
+    </div>
 </section>
