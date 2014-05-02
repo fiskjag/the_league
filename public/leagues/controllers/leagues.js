@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('mean.leagues').controller('LeaguesController', ['$scope', '$stateParams', '$location', '$filter', 'Global', 'Leagues', function ($scope, $stateParams, $location, $filter, Global, Leagues) {
+angular.module('mean.leagues')
+    .controller('LeaguesController', ['$scope', '$stateParams', '$location', '$filter', 'Global', 'Leagues', function ($scope, $stateParams, $location, $filter, Global, Leagues) {
     $scope.global = Global;
 
     // --------------------------- START LEAGUE ---------------------------------------
@@ -82,6 +83,12 @@ angular.module('mean.leagues').controller('LeaguesController', ['$scope', '$stat
 
             var groups = league.groups;
             $scope.group = $filter('filter')(groups, {_id: groupId})[0];
+
+            // Auto-update when match result / dates are changed
+            $scope.$watch('group', function() {
+                $scope.league.groups = groups;
+                $scope.league.$update();
+            }, true);
         });
     };
     // --------------------------- END GROUP ----------------------------------------
@@ -156,6 +163,16 @@ angular.module('mean.leagues').controller('LeaguesController', ['$scope', '$stat
     // --------------------------- END PLAYER ------------------------------------------
 
     // --------------------------- START MATCHES ---------------------------------------
+    $scope.updateMatch = function() {
+        // var league = $scope.league;
+        // var group = $scope.group;
+        // league.$update(function() {
+        //     $scope.league = league;
+        //     $scope.group = group;
+        //     $location.path('leagues/' + league._id + '/groups/' + group._id);
+        // });
+    };
+
     $scope.generateMatches = function() {
         var leagueId = $stateParams.leagueId;
         var groupId = $stateParams.groupId;
@@ -170,21 +187,40 @@ angular.module('mean.leagues').controller('LeaguesController', ['$scope', '$stat
             $scope.group = $filter('filter')(groups, {_id: groupId})[0];
 
             var teams = $scope.group.teams;
-            var matches = $scope.group.matches;
 
+            $scope.group.matches = []; // clear previously generated
+            
             for(var i = 0; i < teams.length; i++) {
-                var hometeam = teams[i];
+                var home = teams[i];
                 
                 for(var j = i+1; j < teams.length; j++) {
-                    var awayteam = teams[j];
+                    var away = teams[j];
 
-                    if(hometeam !== awayteam) {
-                        matches.push({hometeam: hometeam, awayteam: awayteam});
-                        console.log(hometeam.name + ' vs ' + awayteam.name);
+                    if(home !== away) {
+                        $scope.group.matches.push({hometeam: home.name, awayteam: away.name});
+                        console.log(home.name + ' vs ' + away.name);
                     }
                 }
             }
+
+            league.$update(function() {
+                $location.path('leagues/' + league._id + '/groups/' + groupId);
+            });
         });
     };
     // --------------------------- END MATCHES -----------------------------------------
 }]);
+
+// Directive to handle date formatting (currently for match dates)
+angular.module('mean.leagues').directive('dateHandler', function() {
+    return {
+        restrict: 'A',
+        template: '{{matchDate}}',
+        scope: {
+            matchDate: '='
+        },
+        link: function (scope) {
+            scope.matchDate = moment(scope.matchDate).format('YYYY-MM-DD');
+        }
+    };
+});

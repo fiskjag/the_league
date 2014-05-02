@@ -27,9 +27,16 @@
     </div>
 
     <div data-ng-show="!group.matches || group.matches.length">
-        <div ng-repeat="match in group.matches">
+        <div ng-repeat="match in group.matches | orderBy:'date'">
             <div>
+                <input date-handler 
+                    match-date="match.date" 
+                    ng-model="match.date" 
+                    ng-model-options="{ updateOn: 'blur'}">
+                :
                 {{match.hometeam}} - {{match.awayteam}}
+                <input ng-model="match.homegoals"/>
+                <input ng-model="match.awaygoals"/>
             </div>
         </div>
     </div>

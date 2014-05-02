@@ -5,11 +5,26 @@
   "private": false,
   "author": "Linnovate <mean@linnovate.net>",
   "contributors": [
-    {"name":"Lior Kesos", "mail": "lior@linnovate.net"},
-    {"name":"Yonatan Ellman", "mail": "yonatan@linnovate.net"},
-    {"name":"Ehud Shahak", "mail": "ehud@linnovate.net"},
-    {"name":"Amos Haviv", "mail": "mail@amoshaviv"},
-    {"name":"Drew Fyock", "mail": "drew@steelbisondev.com"}
+    {
+      "name": "Lior Kesos",
+      "mail": "lior@linnovate.net"
+    },
+    {
+      "name": "Yonatan Ellman",
+      "mail": "yonatan@linnovate.net"
+    },
+    {
+      "name": "Ehud Shahak",
+      "mail": "ehud@linnovate.net"
+    },
+    {
+      "name": "Amos Haviv",
+      "mail": "mail@amoshaviv"
+    },
+    {
+      "name": "Drew Fyock",
+      "mail": "drew@steelbisondev.com"
+    }
   ],
   "repository": {
     "type": "git",
@@ -56,7 +71,8 @@
     "grunt-contrib-watch": "latest",
     "grunt-env": "^0.4.1",
     "grunt-nodemon": "0.2.0",
-    "load-grunt-tasks": "^0.4.0"
+    "load-grunt-tasks": "^0.4.0",
+    "angular-moment": "^0.7.0"
   },
   "devDependencies": {
     "assetmanager": "^0.1.1",

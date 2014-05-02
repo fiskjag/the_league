@@ -37,7 +37,7 @@ var LeagueSchema = new Schema({
                 {
                     date: {
                         type: Date,
-                        default: ''
+                        default: '2014-01-01'
                     },
                     hometeam: {
                         type: String,

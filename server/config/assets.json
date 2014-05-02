@@ -16,6 +16,7 @@
 			"public/init.js",
 			"public/*/*.js",
 			"public/*/*/*.js",
+			"public/system/lib/moment/moment.js",
 			"!public/build/**"
 		]
 	}
