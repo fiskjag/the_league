@@ -9,7 +9,7 @@
         </a>
     </div> -->
 
-    <div data-ng-show="!league.groups || league.groups.length">
+    <!-- <div data-ng-show="!league.groups || league.groups.length">
         <div ng-repeat="group in league.groups">
             <div>
                 <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}">{{group}}</a>
@@ -18,14 +18,14 @@
         <a class="btn" href="/#!/leagues/{{league._id}}/createGroup">
             <i class="glyphicon glyphicon-plus"></i>
         </a>
-    </div>
+    </div> -->
 	<div data-ng-hide="!league.groups || league.groups.length">No groups yet. 
 		<br> Why don't you <a href="/#!/leagues/{{league._id}}/createGroup">Create One</a>?
 	</div>
 
     <div data-ng-show="!league.groups || league.groups.length">
         <div ng-repeat="group in league.groups">
-            <h2>{{group.name}}</h2>
+            <h2><a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}">{{group.name}}</a></h2>
             <div> 
                 <table> 
                     <tr>
@@ -39,7 +39,7 @@
                         <th>Målskillnad</th>
                         <th>Poäng</th>
                     </tr>
-                    <tr ng-repeat="team in group.teams">
+                    <tr ng-repeat="team in group.teams | orderBy:'points':true">
                         <td>{{team.name}}</td>
                         <td>{{team.gamesplayed}}</td> 
                         <td>{{team.wins}}</td>

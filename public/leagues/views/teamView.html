@@ -15,9 +15,10 @@
     </div> -->
 
     <div data-ng-show="!team.players || team.players.length">
+        <h3>Spelare:</h3>
         <div ng-repeat="player in team.players">
             <div>
-                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/players/{{player._id}}">{{player}}</a>
+                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/players/{{player._id}}">{{player.name}}</a>
             </div>
         </div>
         <a class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/createPlayer">

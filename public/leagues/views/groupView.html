@@ -13,20 +13,22 @@
     </div> -->
 
     <div data-ng-show="!group.teams || group.teams.length">
+        <h3>Lag:</h3>
         <div ng-repeat="team in group.teams">
             <div>
-                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}">{{team}}</a>
+                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}">{{team.name}}</a>
             </div>
         </div>
         <a class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">
             <i class="glyphicon glyphicon-plus"></i>
         </a>
     </div>
-    <div data-ng-hide="!group.teams || group.teams.length">No teams yet. 
-        <br> Why don't you <a href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">Create One</a>?
+    <div data-ng-hide="!group.teams || group.teams.length">Inga lag finns ännu 
+        <br><a href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">Skapa lag</a>
     </div>
 
     <div data-ng-show="!group.matches || group.matches.length">
+        <h3>Matcher:</h3>
         <div ng-repeat="match in group.matches | orderBy:'date'">
             <div>
                 <input date-handler 
@@ -43,7 +45,7 @@
     
     <div data-ng-show="!group.teams || group.teams.length > 1">
         <div data-ng-hide="!group.matches || group.matches.length">Inga matcher skapade</div>
-        <form data-ng-submit="generateMatches()">
+        <form data-ng-hide="!group.matches || group.matches.length" data-ng-submit="generateMatches()">
             <button type="submit" class="btn btn-info">Generera matcher</button>
         </form>
     </div>
