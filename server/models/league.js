@@ -51,11 +51,11 @@ var LeagueSchema = new Schema({
                     },
                     homegoals: {
                         type: Number,
-                        default: 0
+                        default: null
                     },  
                     awaygoals: {
                         type: Number,
-                        default: 0
+                        default: null
                     },  
                 }
             ],
