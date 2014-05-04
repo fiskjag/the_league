@@ -107,9 +107,6 @@ angular.module('mean.leagues')
         var teams = group.teams;
         var matches = group.matches;
 
-        var hometeam = {};
-        var awayteam = {};
-
         for(var j = 0; j < matches.length; j++) {
             var hometeam = $filter('filter')(teams, {_id: matches[j].hometeam})[0];
             var awayteam = $filter('filter')(teams, {_id: matches[j].awayteam})[0];
@@ -182,7 +179,28 @@ angular.module('mean.leagues')
 
             var teams = $scope.group.teams;
             $scope.team = $filter('filter')(teams, {_id: teamId})[0];
+
+            // Auto-update when match result / dates are changed
+            $scope.$watch('team', function() {
+                var groupIndex = $scope.getObjectIndex(groups, groupId);
+                var teamIndex = $scope.getObjectIndex(teams, teamId);
+
+                $scope.league.groups[groupIndex].teams[teamIndex].players = $scope.team.players;
+                $scope.league.$update();        
+            }, true);
         });
+    };
+
+    $scope.getObjectIndex = function(array, id) {
+        var index = -1;
+
+        for(var i = 0; i < array.length; i++) {
+            if(array[i]._id === id) {
+                return i;
+            }
+        }
+
+        return index;
     };
     // --------------------------- END TEAM ------------------------------------------
 

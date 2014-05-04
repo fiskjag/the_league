@@ -16,11 +16,29 @@
 
     <div data-ng-show="!team.players || team.players.length">
         <h3>Spelare:</h3>
-        <div ng-repeat="player in team.players">
-            <div>
-                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/players/{{player._id}}">{{player.name}}</a>
-            </div>
-        </div>
+        <table>
+            <tr>
+                <th>Namn</th>
+                <th>Gjorda mål</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="player in team.players">
+                <td><a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/players/{{player._id}}">{{player.name}}</a></td>
+                
+                <td>{{player.goalsscored}}</td>
+                
+                <td><a class="btn" ng-click='player.goalsscored = player.goalsscored > 0 ? player.goalsscored - 1 : 0'>
+                    <i class="glyphicon glyphicon-minus"></i>
+                </a>
+                </td>
+
+                <td><a class="btn" ng-click='player.goalsscored = player.goalsscored + 1'>
+                    <i class="glyphicon glyphicon-plus"></i>
+                </a>
+                </td>
+            </tr>
+        </table>
         <a class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/createPlayer">
             <i class="glyphicon glyphicon-plus"></i>
         </a>
