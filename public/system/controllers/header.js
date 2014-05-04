@@ -8,11 +8,11 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
         // Default hard coded menu items for main menu
         var defaultMainMenu = [{
             'roles': ['authenticated'],
-            'title': 'Leagues',
+            'title': 'Ligor',
             'link': 'all leagues'
         }, {
             'roles': ['authenticated'],
-            'title': 'Create New League',
+            'title': 'Skapa ny liga',
             'link': 'create league'
         }];
 
