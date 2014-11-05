@@ -119,16 +119,16 @@ angular.module('mean.leagues')
             hometeam.wins += (hometeamwin ? 1 : 0);
             hometeam.ties += (draw ? 1 : 0);
             hometeam.losses += (awayteamwin ? 1 : 0);
-            hometeam.goalsscored += matches[j].homegoals;
-            hometeam.goalsagainst += matches[j].awaygoals;
+            hometeam.goalsscored += matches[j].homegoals !== null ? parseInt(matches[j].homegoals) : 0;
+            hometeam.goalsagainst += matches[j].awaygoals !== null ? parseInt(matches[j].awaygoals) : 0;
             hometeam.points += (hometeamwin ? 3 : (draw ? 1 : 0));
 
             awayteam.gamesplayed++;
             awayteam.wins += (awayteamwin ? 1 : 0);
             awayteam.ties += (draw ? 1 : 0);
             awayteam.losses += (hometeamwin ? 1 : 0);
-            awayteam.goalsscored += matches[j].awaygoals;
-            awayteam.goalsagainst += matches[j].homegoals;
+            awayteam.goalsscored += matches[j].awaygoals !== null ? parseInt(matches[j].awaygoals) : 0;
+            awayteam.goalsagainst += matches[j].homegoals !== null ? parseInt(matches[j].homegoals) : 0;
             awayteam.points += (awayteamwin ? 3 : (draw ? 1 : 0));
 
             $filter('filter')(teams, {_id: matches[j].hometeam})[0] = hometeam;

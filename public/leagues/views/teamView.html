@@ -40,10 +40,10 @@
             </tr>
         </table>
         <a class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/createPlayer">
-            <i class="glyphicon glyphicon-plus"></i>
+            <i data-ng-show="global.authenticated" class="glyphicon glyphicon-plus"></i>
         </a>
     </div>
     <div data-ng-hide="!team.players || team.players.length">Inga spelare ännu 
-        <br><a href="/#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/createPlayer">Skapa spelare</a>
+        <br><a data-ng-show="global.authenticated" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}/createPlayer">Skapa spelare</a>
     </div>
 </section>

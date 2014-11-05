@@ -12,6 +12,13 @@ var hasAuthorization = function(req, res, next) {
     next();
 };
 
+var hasCreatePrivilege = function(req, res, next) {
+    // if (req.league.user.id !== req.user.id) {
+    //     return;
+    // }
+    next();
+};
+
 module.exports = function(app) {
 
     app.get('/leagues', leagues.all);

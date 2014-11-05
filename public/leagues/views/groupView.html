@@ -12,19 +12,41 @@
         </a>
     </div> -->
 
+
     <div data-ng-show="!group.teams || group.teams.length">
-        <h3>Lag:</h3>
-        <div ng-repeat="team in group.teams">
-            <div>
-                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}">{{team.name}}</a>
-            </div>
-        </div>
-        <a class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">
+        <h3>{{group.name}}</h3>
+        <table> 
+            <tr>
+                <th>Lag</th>
+                <th>Matcher</th> 
+                <th>Segrar</th>
+                <th>Oavgjorda</th>
+                <th>Förluster</th>
+                <th>Gjorda mål</th>
+                <th>Insläppta mål</th>
+                <th>Målskillnad</th>
+                <th>Poäng</th>
+            </tr>
+            <tr ng-repeat="team in group.teams | orderBy:'points':true">
+                <td>
+                    <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}">{{team.name}}</a>
+                </td>
+                <td>{{team.gamesplayed}}</td> 
+                <td>{{team.wins}}</td>
+                <td>{{team.ties}}</td>
+                <td>{{team.losses}}</td>
+                <td>{{team.goalsscored}}</td>
+                <td>{{team.goalsagainst}}</td>
+                <td>{{team.goalsscored - team.goalsagainst}}</td>
+                <td>{{team.points}}</td>
+            </tr>   
+        </table>
+        <a data-ng-show="global.authenticated" class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">
             <i class="glyphicon glyphicon-plus"></i>
         </a>
     </div>
     <div data-ng-hide="!group.teams || group.teams.length">Inga lag finns ännu 
-        <br><a href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">Skapa lag</a>
+        <br><a data-ng-show="global.authenticated" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">Skapa lag</a>
     </div>
 
     <div data-ng-show="!group.matches || group.matches.length">
@@ -45,7 +67,7 @@
     
     <div data-ng-show="!group.teams || group.teams.length > 1">
         <div data-ng-hide="!group.matches || group.matches.length">Inga matcher skapade</div>
-        <form data-ng-submit="generateMatches()">
+        <form data-ng-show="global.authenticated" data-ng-submit="generateMatches()">
         <!-- <form data-ng-hide="!group.matches || group.matches.length" data-ng-submit="generateMatches()"> -->
             <button type="submit" class="btn btn-info">Generera matcher</button>
         </form>

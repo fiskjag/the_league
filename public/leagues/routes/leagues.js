@@ -34,10 +34,11 @@ angular.module('mean.leagues').config(['$stateProvider',
             // ---------------------- START LEAGUE ROUTES ---------------------
             .state('all leagues', {
                 url: '/leagues',
-                templateUrl: 'public/leagues/views/list.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                templateUrl: 'public/leagues/views/list.html'
+                // ,
+                // resolve: {
+                //     loggedin: checkLoggedin
+                // }
             })
             .state('create league', {
                 url: '/leagues/create',
@@ -55,10 +56,11 @@ angular.module('mean.leagues').config(['$stateProvider',
             })
             .state('league by id', { // list groups in league here
                 url: '/leagues/:leagueId',
-                templateUrl: 'public/leagues/views/view.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                templateUrl: 'public/leagues/views/view.html'
+                // ,
+                // resolve: {
+                //     loggedin: checkLoggedin
+                // }
             })
             // ---------------------- END LEAGUE ROUTES ----------------------
 
@@ -79,20 +81,22 @@ angular.module('mean.leagues').config(['$stateProvider',
             })
             .state('group', { // list teams in group here
                 url: '/leagues/:leagueId/groups/:groupId',
-                templateUrl: 'public/leagues/views/groupView.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                templateUrl: 'public/leagues/views/groupView.html'
+                // ,
+                // resolve: {
+                //     loggedin: checkLoggedin
+                // }
             })
             // ---------------------- END GROUP ROUTES ----------------------
 
             // ---------------------- START TEAM ROUTES ---------------------
             .state('all teams (by group)', {
                 url: '/leagues/:leagueId/groups/:groupId/teams',
-                templateUrl: 'public/leagues/views/teamsList.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                templateUrl: 'public/leagues/views/teamsList.html'
+                // ,
+                // resolve: {
+                //     loggedin: checkLoggedin
+                // }
             })
             .state('add new team to a group', {
                 url: '/leagues/:leagueId/groups/:groupId/createTeam',
@@ -103,20 +107,22 @@ angular.module('mean.leagues').config(['$stateProvider',
             })
             .state('team', {
                 url: '/leagues/:leagueId/groups/:groupId/teams/:teamId',
-                templateUrl: 'public/leagues/views/teamView.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                templateUrl: 'public/leagues/views/teamView.html'
+                // ,
+                // resolve: {
+                //     loggedin: checkLoggedin
+                // }
             })
             // ---------------------- END TEAM ROUTES -----------------------
             
             // ---------------------- START PLAYER ROUTES -------------------
             .state('all players (by team)', {
                 url: '/leagues/:leagueId/groups/:groupId/teams/:teamId/players',
-                templateUrl: 'public/leagues/views/playersList.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                templateUrl: 'public/leagues/views/playersList.html'
+                // ,
+                // resolve: {
+                //     loggedin: checkLoggedin
+                // }
             })
             .state('create player', {
                 url: '/leagues/:leagueId/groups/:groupId/teams/:teamId/createPlayer',
@@ -127,17 +133,19 @@ angular.module('mean.leagues').config(['$stateProvider',
             })
             .state('edit player', {
                 url: '/leagues/:leagueId/groups/:groupId/teams/:teamId/editPlayer',
-                templateUrl: 'public/leagues/views/playerEdit.html',
+                templateUrl: 'public/leagues/views/playerEdit.html'
+                ,
                 resolve: {
                     loggedin: checkLoggedin
                 }
             })
             .state('player', {
                 url: '/leagues/:leagueId/groups/:groupId/teams/:teamId/players/:playerId',
-                templateUrl: 'public/leagues/views/playerView.html',
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                templateUrl: 'public/leagues/views/playerView.html'
+                // ,
+                // resolve: {
+                //     loggedin: checkLoggedin
+                // }
             });
             // ---------------------- END PLAYER ROUTES ---------------------
 
