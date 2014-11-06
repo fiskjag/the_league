@@ -24,7 +24,7 @@ module.exports = function(app) {
     app.get('/leagues', leagues.all);
     app.post('/leagues', authorization.requiresLogin, leagues.create);
     app.get('/leagues/:leagueId', leagues.show);
-    app.put('/leagues/:leagueId', authorization.requiresLogin, hasAuthorization, leagues.update);
+    app.put('/leagues/:leagueId', leagues.update);
     app.del('/leagues/:leagueId', authorization.requiresLogin, hasAuthorization, leagues.destroy);
     
     // Finish with setting up the leagueId param

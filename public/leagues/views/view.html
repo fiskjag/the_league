@@ -20,7 +20,7 @@
         </a>
     </div> -->
 	<div data-ng-hide="!league.groups || league.groups.length">Inga grupper skapade.
-		<br><a data-ng-show="global.authenticated" href="/#!/leagues/{{league._id}}/createGroup">Skapa grupp</a>
+		<br><a data-ng-show="global.hasCreatePrivilege" href="/#!/leagues/{{league._id}}/createGroup">Skapa grupp</a>
 	</div>
 
     <div data-ng-show="!league.groups || league.groups.length">
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <a data-ng-show="global.authenticated" class="btn" href="/#!/leagues/{{league._id}}/createGroup">
+    <a data-ng-show="global.hasCreatePrivilege" class="btn" href="/#!/leagues/{{league._id}}/createGroup">
         <i class="glyphicon glyphicon-plus"></i>
     </a>
 </section>

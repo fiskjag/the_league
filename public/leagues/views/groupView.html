@@ -41,12 +41,12 @@
                 <td>{{team.points}}</td>
             </tr>   
         </table>
-        <a data-ng-show="global.authenticated" class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">
+        <a data-ng-show="global.hasCreatePrivilege" class="btn" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">
             <i class="glyphicon glyphicon-plus"></i>
         </a>
     </div>
     <div data-ng-hide="!group.teams || group.teams.length">Inga lag finns ännu 
-        <br><a data-ng-show="global.authenticated" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">Skapa lag</a>
+        <br><a data-ng-show="global.hasCreatePrivilege" href="/#!/leagues/{{league._id}}/groups/{{group._id}}/createTeam">Skapa lag</a>
     </div>
 
     <div data-ng-show="!group.matches || group.matches.length">
