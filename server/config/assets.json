@@ -17,6 +17,7 @@
 			"public/*/*.js",
 			"public/*/*/*.js",
 			"public/system/lib/moment/moment.js",
+			"public/system/lib/moment/angular-moment.min.js",
 			"!public/build/**"
 		]
 	}

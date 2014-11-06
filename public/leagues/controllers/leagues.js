@@ -289,7 +289,7 @@ angular.module('mean.leagues').directive('dateHandler', function() {
             matchDate: '='
         },
         link: function (scope) {
-            scope.matchDate = $moment(scope.matchDate).format('YYYY-MM-DD');
+            scope.matchDate = window.moment(scope.matchDate).format('YYYY-MM-DD');
         }
     };
 });

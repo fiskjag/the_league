@@ -57,10 +57,11 @@
                     match-date="match.date" 
                     ng-model="match.date" 
                     ng-model-options="{ updateOn: 'blur'}">
+
                 :
                 {{match.hometeam}} - {{match.awayteam}}
-                <input ng-model="match.homegoals"/>
-                <input ng-model="match.awaygoals"/>
+                <input ng-model="match.homegoals" ng-model-options="{ updateOn: 'blur'}"/>
+                <input ng-model="match.awaygoals" ng-model-options="{ updateOn: 'blur'}"/>
             </div>
         </div>
     </div>
