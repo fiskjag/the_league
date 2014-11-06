@@ -67,7 +67,7 @@
     
     <div data-ng-show="!group.teams || group.teams.length > 1">
         <div data-ng-hide="!group.matches || group.matches.length">Inga matcher skapade</div>
-        <form data-ng-show="global.authenticated" data-ng-submit="generateMatches()">
+        <form data-ng-show="global.hasCreatePrivilege" data-ng-submit="generateMatches()">
         <!-- <form data-ng-hide="!group.matches || group.matches.length" data-ng-submit="generateMatches()"> -->
             <button type="submit" class="btn btn-info">Generera matcher</button>
         </form>
