@@ -115,20 +115,25 @@ angular.module('mean.leagues')
             var draw = (matches[j].homegoals === matches[j].awaygoals ? true : false);
             var awayteamwin = (matches[j].homegoals < matches[j].awaygoals ? true : false);
 
+            var hometeamgoalsscored = (matches[j].homegoals !== null && matches[j].homegoals !== '' && !isNaN(matches[j].homegoals)) ? parseInt(matches[j].homegoals) : 0;
+            var hometeamgoalsagainst = (matches[j].awaygoals !== null && matches[j].awaygoals !== '' && !isNaN(matches[j].awaygoals)) ? parseInt(matches[j].awaygoals) : 0;
+            var awayteamgoalsscored = (matches[j].awaygoals !== null && matches[j].awaygoals !== '' && !isNaN(matches[j].awaygoals)) ? parseInt(matches[j].awaygoals) : 0;
+            var awayteamgoalsagainst = (matches[j].homegoals !== null && matches[j].homegoals !== '' && !isNaN(matches[j].homegoals)) ? parseInt(matches[j].homegoals) : 0;
+
             hometeam.gamesplayed++;
             hometeam.wins += (hometeamwin ? 1 : 0);
             hometeam.ties += (draw ? 1 : 0);
             hometeam.losses += (awayteamwin ? 1 : 0);
-            hometeam.goalsscored += matches[j].homegoals !== null ? parseInt(matches[j].homegoals) : 0;
-            hometeam.goalsagainst += matches[j].awaygoals !== null ? parseInt(matches[j].awaygoals) : 0;
+            hometeam.goalsscored += hometeamgoalsscored;
+            hometeam.goalsagainst += hometeamgoalsagainst;
             hometeam.points += (hometeamwin ? 3 : (draw ? 1 : 0));
 
             awayteam.gamesplayed++;
             awayteam.wins += (awayteamwin ? 1 : 0);
             awayteam.ties += (draw ? 1 : 0);
             awayteam.losses += (hometeamwin ? 1 : 0);
-            awayteam.goalsscored += matches[j].awaygoals !== null ? parseInt(matches[j].awaygoals) : 0;
-            awayteam.goalsagainst += matches[j].homegoals !== null ? parseInt(matches[j].homegoals) : 0;
+            awayteam.goalsscored += awayteamgoalsscored;
+            awayteam.goalsagainst += awayteamgoalsagainst;
             awayteam.points += (awayteamwin ? 3 : (draw ? 1 : 0));
 
             $filter('filter')(teams, {_id: matches[j].hometeam})[0] = hometeam;
@@ -290,6 +295,22 @@ angular.module('mean.leagues').directive('dateHandler', function() {
         },
         link: function (scope) {
             scope.matchDate = window.moment(scope.matchDate).format('YYYY-MM-DD');
+        }
+    };
+}).directive('ngModelOnblur', function() {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        priority: 1, // needed for angular 1.2.x
+        link: function(scope, elm, attr, ngModelCtrl) {
+            if (attr.type === 'radio' || attr.type === 'checkbox') return;
+
+            elm.unbind('input').unbind('keydown').unbind('change');
+            elm.bind('blur', function() {
+                scope.$apply(function() {
+                    ngModelCtrl.$setViewValue(elm.val());
+                });         
+            });
         }
     };
 });
