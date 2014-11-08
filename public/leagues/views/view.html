@@ -55,6 +55,20 @@
         </div>
     </div>
 
+    <h2>Skytteliga</h2>
+    <table> 
+        <tr>
+            <th>Spelare</th>
+            <th>Lag</th>
+            <th>Mål</th> 
+        </tr>
+        <tr data-ng-repeat="scorer in topscorers">
+            <td>{{scorer.name}}</td>
+            <td>{{scorer.team}}</td>
+            <td>{{scorer.goalsscored}}</td>
+        </tr>
+    </table>   
+
     <a data-ng-show="global.hasCreatePrivilege" class="btn" href="/#!/leagues/{{league._id}}/createGroup">
         <i class="glyphicon glyphicon-plus"></i>
     </a>

@@ -56,6 +56,29 @@ angular.module('mean.leagues')
             leagueId: $stateParams.leagueId
         }, function(league) {
             $scope.league = league;
+
+            var groups = league.groups;
+
+            var scorers = [];
+
+            for(var i = 0; i < groups.length; i++) {
+                var teams = groups[i].teams;
+
+                for(var j = 0; j < teams.length; j++) {
+                    var players = teams[j].players;
+
+                    for(var k = 0; k < players.length; k++) {
+                        var scorer = {name: players[k].name, team: teams[j].name, goalsscored: players[k].goalsscored};
+                        scorers.push(scorer);
+                    }
+                }
+            }
+            
+            scorers = scorers.sort(function(p1, p2) {
+                return p2.goalsscored - p1.goalsscored;
+            });
+
+            $scope.topscorers = scorers;
         });
     };
     // --------------------------- END LEAGUE -----------------------------------------
@@ -115,29 +138,32 @@ angular.module('mean.leagues')
             var draw = (matches[j].homegoals === matches[j].awaygoals ? true : false);
             var awayteamwin = (matches[j].homegoals < matches[j].awaygoals ? true : false);
 
-            var hometeamgoalsscored = (matches[j].homegoals !== null && matches[j].homegoals !== '' && !isNaN(matches[j].homegoals)) ? parseInt(matches[j].homegoals) : 0;
-            var hometeamgoalsagainst = (matches[j].awaygoals !== null && matches[j].awaygoals !== '' && !isNaN(matches[j].awaygoals)) ? parseInt(matches[j].awaygoals) : 0;
-            var awayteamgoalsscored = (matches[j].awaygoals !== null && matches[j].awaygoals !== '' && !isNaN(matches[j].awaygoals)) ? parseInt(matches[j].awaygoals) : 0;
-            var awayteamgoalsagainst = (matches[j].homegoals !== null && matches[j].homegoals !== '' && !isNaN(matches[j].homegoals)) ? parseInt(matches[j].homegoals) : 0;
+            if((matches[j].homegoals !== null && matches[j].homegoals !== '' && !isNaN(matches[j].homegoals)) ||
+               (matches[j].awaygoals !== null && matches[j].awaygoals !== '' && !isNaN(matches[j].awaygoals))) {
+                var hometeamgoalsscored = (matches[j].homegoals !== null && matches[j].homegoals !== '' && !isNaN(matches[j].homegoals)) ? parseInt(matches[j].homegoals) : 0;
+                var hometeamgoalsagainst = (matches[j].awaygoals !== null && matches[j].awaygoals !== '' && !isNaN(matches[j].awaygoals)) ? parseInt(matches[j].awaygoals) : 0;
+                var awayteamgoalsscored = (matches[j].awaygoals !== null && matches[j].awaygoals !== '' && !isNaN(matches[j].awaygoals)) ? parseInt(matches[j].awaygoals) : 0;
+                var awayteamgoalsagainst = (matches[j].homegoals !== null && matches[j].homegoals !== '' && !isNaN(matches[j].homegoals)) ? parseInt(matches[j].homegoals) : 0;
 
-            hometeam.gamesplayed++;
-            hometeam.wins += (hometeamwin ? 1 : 0);
-            hometeam.ties += (draw ? 1 : 0);
-            hometeam.losses += (awayteamwin ? 1 : 0);
-            hometeam.goalsscored += hometeamgoalsscored;
-            hometeam.goalsagainst += hometeamgoalsagainst;
-            hometeam.points += (hometeamwin ? 3 : (draw ? 1 : 0));
+                hometeam.gamesplayed++;
+                hometeam.wins += (hometeamwin ? 1 : 0);
+                hometeam.ties += (draw ? 1 : 0);
+                hometeam.losses += (awayteamwin ? 1 : 0);
+                hometeam.goalsscored += hometeamgoalsscored;
+                hometeam.goalsagainst += hometeamgoalsagainst;
+                hometeam.points += (hometeamwin ? 3 : (draw ? 1 : 0));
 
-            awayteam.gamesplayed++;
-            awayteam.wins += (awayteamwin ? 1 : 0);
-            awayteam.ties += (draw ? 1 : 0);
-            awayteam.losses += (hometeamwin ? 1 : 0);
-            awayteam.goalsscored += awayteamgoalsscored;
-            awayteam.goalsagainst += awayteamgoalsagainst;
-            awayteam.points += (awayteamwin ? 3 : (draw ? 1 : 0));
+                awayteam.gamesplayed++;
+                awayteam.wins += (awayteamwin ? 1 : 0);
+                awayteam.ties += (draw ? 1 : 0);
+                awayteam.losses += (hometeamwin ? 1 : 0);
+                awayteam.goalsscored += awayteamgoalsscored;
+                awayteam.goalsagainst += awayteamgoalsagainst;
+                awayteam.points += (awayteamwin ? 3 : (draw ? 1 : 0));
 
-            $filter('filter')(teams, {_id: matches[j].hometeam})[0] = hometeam;
-            $filter('filter')(teams, {_id: matches[j].awayteam})[0] = awayteam;
+                $filter('filter')(teams, {_id: matches[j].hometeam})[0] = hometeam;
+                $filter('filter')(teams, {_id: matches[j].awayteam})[0] = awayteam;
+            }
         }
     };
 
