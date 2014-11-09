@@ -242,7 +242,7 @@ angular.module('mean.leagues')
         var team = $scope.team;
         var player = $scope.player;
         
-        team.players.push({_id: player, name: player});
+        team.players.push({name: player});
 
         league.$update(function() {
             $location.path('leagues/' + league._id + '/groups/' + group._id + '/teams/' + team._id); // + '/players/' + player._id);

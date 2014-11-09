@@ -101,11 +101,6 @@ var LeagueSchema = new Schema({
                     },
                     players: [
                         {
-                            _id: {
-                                type: String,
-                                trim: false,
-                                required: true
-                            },
                             name: {
                                 type: String,
                                 default: '',
