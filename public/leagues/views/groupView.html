@@ -27,7 +27,7 @@
                 <th>Målskillnad</th>
                 <th>Poäng</th>
             </tr>
-            <tr ng-repeat="team in group.teams | orderBy:'points':true">
+            <tr ng-repeat="team in group.teams | orderBy:['points', 'goaldiff', 'goalsscored']:true">
                 <td>
                     <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}/teams/{{team._id}}">{{team.name}}</a>
                 </td>
@@ -37,7 +37,7 @@
                 <td>{{team.losses}}</td>
                 <td>{{team.goalsscored}}</td>
                 <td>{{team.goalsagainst}}</td>
-                <td>{{team.goalsscored - team.goalsagainst}}</td>
+                <td>{{team.goaldiff}}</td>
                 <td>{{team.points}}</td>
             </tr>   
         </table>

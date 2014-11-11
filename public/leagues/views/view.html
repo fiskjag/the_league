@@ -1,29 +1,14 @@
 <section data-ng-controller="LeaguesController" data-ng-init="findOne()">
     <div>Liga: {{league.name}}</div>
-    <!-- <div data-ng-show="global.user._id == league.user._id">
-        <a class="btn" href="/#!/leagues/{{league._id}}/edit">
-        	<i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn" data-ng-click="remove();">
-            <i class="glyphicon glyphicon-trash"></i>
-        </a>
-    </div> -->
-
-    <!-- <div data-ng-show="!league.groups || league.groups.length">
-        <div ng-repeat="group in league.groups">
-            <div>
-                <a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}">{{group}}</a>
-            </div>
-        </div>
-        <a class="btn" href="/#!/leagues/{{league._id}}/createGroup">
-            <i class="glyphicon glyphicon-plus"></i>
-        </a>
-    </div> -->
 	<div data-ng-hide="!league.groups || league.groups.length">Inga grupper skapade.
 		<br><a data-ng-show="global.hasCreatePrivilege" href="/#!/leagues/{{league._id}}/createGroup">Skapa grupp</a>
 	</div>
 
     <div data-ng-show="!league.groups || league.groups.length">
+        <div ng-repeat="q in league.playoffs">
+            <h2>Aha: {{q}}</h2>
+        </div>
+
         <div ng-repeat="group in league.groups">
             <h2><a data-ng-href="#!/leagues/{{league._id}}/groups/{{group._id}}">{{group.name}}</a></h2>
             <div> 

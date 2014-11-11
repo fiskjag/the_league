@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.leagues')
-    .controller('LeaguesController', ['$scope', '$stateParams', '$location', '$filter', 'Global', 'Leagues', function ($scope, $stateParams, $location, $filter, Global, Leagues) {
+    .controller('LeaguesController', ['$scope', '$stateParams', '$location', '$filter', '$http', 'Global', 'Leagues', function ($scope, $stateParams, $location, $filter, $http, Global, Leagues) {
     $scope.global = Global;
 
     // --------------------------- START LEAGUE ---------------------------------------
@@ -109,9 +109,6 @@ angular.module('mean.leagues')
 
             // Auto-update when match result / dates are changed
             $scope.$watch('group', function() {
-                // $scope.league.groups = groups;
-                // $scope.league.$update();
-
                 for(var i = 0; i < $scope.league.groups.length; i++) {
                     if($scope.league.groups[i]._id === groupId) {
                         $scope.league.groups[i] = $scope.group;
@@ -120,6 +117,8 @@ angular.module('mean.leagues')
                     }
                 }
 
+                //$scope.resetPlayoffs($scope.league);
+                $scope.updatePlayoffs($scope.league);
                 $scope.league.$update();        
 
             }, true);
@@ -151,6 +150,7 @@ angular.module('mean.leagues')
                 hometeam.losses += (awayteamwin ? 1 : 0);
                 hometeam.goalsscored += hometeamgoalsscored;
                 hometeam.goalsagainst += hometeamgoalsagainst;
+                hometeam.goaldiff += hometeamgoalsscored - hometeamgoalsagainst;
                 hometeam.points += (hometeamwin ? 3 : (draw ? 1 : 0));
 
                 awayteam.gamesplayed++;
@@ -159,6 +159,7 @@ angular.module('mean.leagues')
                 awayteam.losses += (hometeamwin ? 1 : 0);
                 awayteam.goalsscored += awayteamgoalsscored;
                 awayteam.goalsagainst += awayteamgoalsagainst;
+                awayteam.goaldiff += awayteamgoalsscored - awayteamgoalsagainst;
                 awayteam.points += (awayteamwin ? 3 : (draw ? 1 : 0));
 
                 $filter('filter')(teams, {_id: matches[j].hometeam})[0] = hometeam;
@@ -177,7 +178,41 @@ angular.module('mean.leagues')
             teams[j].losses = 0;
             teams[j].goalsscored = 0;
             teams[j].goalsagainst = 0;
+            teams[j].goaldiff = 0;
             teams[j].points = 0;
+        }
+    };
+
+    $scope.updatePlayoffs = function(league) {
+        var groups = league.groups;
+        var playoffs = league.playoffs;
+
+        for (var i = 0; i < groups.length; i++) {
+            var teams = $filter('filter')(groups[i].teams);
+            teams = $filter('orderBy')(teams, 'points', true);
+            teams = $filter('limitTo')(teams, 4);
+            
+            hometeams = teams;
+        }
+
+        for (i = 0; i < hometeams.length; i++) {
+            qf[i].hometeam = hometeams[i];
+            qf[i].awayteam = awayteams[3 - i];
+        }
+
+        playoffs.quarterfinals = qf;
+        console.log(league.playoffs);
+    };
+
+    $scope.resetPlayoffs = function(league) {
+        var playoffs = league.playoffs;
+
+        for(var i = 0; i < playoffs.length; i++) {
+            playoffs.quarterfinals[i].date = new Date(); 
+            playoffs.quarterfinals[i].hometeam = '';
+            playoffs.quarterfinals[i].awayteam = '';
+            playoffs.quarterfinals[i].homegoals = 0;
+            playoffs.quarterfinals[i].awaygoals = 0;
         }
     };
     // --------------------------- END GROUP ----------------------------------------

@@ -37,7 +37,7 @@ var LeagueSchema = new Schema({
                 {
                     date: {
                         type: Date,
-                        default: '2014-01-01'
+                        default: new Date()
                     },
                     hometeam: {
                         type: String,
@@ -95,6 +95,10 @@ var LeagueSchema = new Schema({
                         type: Number,
                         default: 0
                     },
+                    goaldiff: {
+                        type: Number,
+                        default: 0
+                    },
                     points: {
                         type: Number,
                         default: 0
@@ -120,6 +124,86 @@ var LeagueSchema = new Schema({
             ]
         }
     ],
+    playoffs: {
+        quarterfinals: [
+            {
+                date: {
+                    type: Date,
+                    default: new Date()
+                },
+                hometeam: {
+                    type: String,
+                    default: '',
+                    trim: true
+                },
+                awayteam: {
+                    type: String,
+                    default: '',
+                    trim: true
+                },
+                homegoals: {
+                    type: Number,
+                    default: null
+                },  
+                awaygoals: {
+                    type: Number,
+                    default: null
+                },  
+            }
+        ],
+        semifinals: [
+            {
+                date: {
+                    type: Date,
+                    default: new Date()
+                },
+                hometeam: {
+                    type: String,
+                    default: '',
+                    trim: true
+                },
+                awayteam: {
+                    type: String,
+                    default: '',
+                    trim: true
+                },
+                homegoals: {
+                    type: Number,
+                    default: null
+                },  
+                awaygoals: {
+                    type: Number,
+                    default: null
+                },  
+            }
+        ],
+        leaguefinal: [
+            {
+                date: {
+                    type: Date,
+                    default: new Date()
+                },
+                hometeam: {
+                    type: String,
+                    default: '',
+                    trim: true
+                },
+                awayteam: {
+                    type: String,
+                    default: '',
+                    trim: true
+                },
+                homegoals: {
+                    type: Number,
+                    default: null
+                },  
+                awaygoals: {
+                    type: Number,
+                    default: null
+                },  
+            }
+        ]
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'
