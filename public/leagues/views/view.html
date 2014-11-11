@@ -5,8 +5,8 @@
 	</div>
 
     <div data-ng-show="!league.groups || league.groups.length">
-        <div ng-repeat="q in league.playoffs">
-            <h2>Aha: {{q}}</h2>
+        <div ng-repeat="game in league.playoffs.quarterfinals">
+            <p>{{game.hometeam}} vs {{game.awayteam}}</p>
         </div>
 
         <div ng-repeat="group in league.groups">
@@ -24,7 +24,7 @@
                         <th>Målskillnad</th>
                         <th>Poäng</th>
                     </tr>
-                    <tr ng-repeat="team in group.teams | orderBy:'points':true">
+                    <tr ng-repeat="team in group.teams | orderBy:['points', 'goaldiff', 'goalsscored']:true">
                         <td>{{team.name}}</td>
                         <td>{{team.gamesplayed}}</td> 
                         <td>{{team.wins}}</td>

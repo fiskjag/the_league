@@ -186,13 +186,20 @@ angular.module('mean.leagues')
     $scope.updatePlayoffs = function(league) {
         var groups = league.groups;
         var playoffs = league.playoffs;
+        var qf = playoffs.quarterfinals;
+
+        var hometeams, awayteams;
 
         for (var i = 0; i < groups.length; i++) {
             var teams = $filter('filter')(groups[i].teams);
             teams = $filter('orderBy')(teams, 'points', true);
             teams = $filter('limitTo')(teams, 4);
             
-            hometeams = teams;
+            if(i === 0) {
+                hometeams = teams;
+            } else {
+                awayteams = teams;
+            }
         }
 
         for (i = 0; i < hometeams.length; i++) {
@@ -201,7 +208,6 @@ angular.module('mean.leagues')
         }
 
         playoffs.quarterfinals = qf;
-        console.log(league.playoffs);
     };
 
     $scope.resetPlayoffs = function(league) {
