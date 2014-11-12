@@ -58,6 +58,7 @@ angular.module('mean.leagues')
             $scope.league = league;
 
             var groups = league.groups;
+            $scope.playoffs = $filter('filter')(league);
 
             var scorers = [];
 
@@ -73,6 +74,36 @@ angular.module('mean.leagues')
                     }
                 }
             }
+
+            // Auto-update when match result / dates are changed
+            // TODO: First update qf results + make sure to save
+            // Then generate semi-finals based on the results.
+            $scope.$watch('playoffs', function() {
+                // if($scope.league.playoffs.quarterfinals.length > 0) {
+                //     var q = $scope.updatePlayoffResults($scope.league.playoffs.quarterfinals);
+                //     console.log(q);
+                //     for(var i = 0; i < q.length; i++) {
+                //         var x = i % 1;
+                //         if(x === 0) {
+                //             $scope.league.playoffs.semifinals[x].hometeam = q[i];
+                //         } else {
+                //             $scope.league.playoffs.semifinals[x].awayteam = q[i];
+                //         }
+                //     }
+                // }
+
+                // for(i = 0; i < $scope.league.playoffs.semifinals.length; i++) {
+                //     if($scope.league.playoffs.semifinals.length > 0)
+                //     console.log('SF ' + $scope.league.playoffs.semifinals[i].hometeam + ' vs ' +
+                //         $scope.league.playoffs.semifinals[i].awayteam);
+                // }
+
+                // for(i = 0; i < $scope.league.playoffs.leaguefinal.length; i++) {
+                //     if($scope.league.playoffs.leaguefinal.length > 0)
+                //     console.log('FF ' + $scope.league.playoffs.leaguefinal[i].hometeam + ' vs ' +
+                //         $scope.league.playoffs.leaguefinal[i].awayteam);
+                // }
+            }, true);
             
             scorers = scorers.sort(function(p1, p2) {
                 return p2.goalsscored - p1.goalsscored;
@@ -82,6 +113,21 @@ angular.module('mean.leagues')
         });
     };
     // --------------------------- END LEAGUE -----------------------------------------
+
+    $scope.updatePlayoffResults = function(stage) {
+        var winners = [];
+        for(var i = 0; i < stage.length; i++) {
+            if(stage[i].homegoals > stage[i].awaygoals) {
+                winners.push(stage[i].hometeam);
+            } else if (stage[i].homegoals < stage[i].awaygoals) {
+                winners.push(stage[i].awayteam);
+            } else {
+                winners.push('DRAW');
+            }
+        }
+
+        return winners;
+    };
 
     // --------------------------- START GROUP ----------------------------------------
     $scope.createGroup = function() {
@@ -203,8 +249,8 @@ angular.module('mean.leagues')
         }
 
         for (i = 0; i < hometeams.length; i++) {
-            qf[i].hometeam = hometeams[i];
-            qf[i].awayteam = awayteams[3 - i];
+            qf[i].hometeam = hometeams[i].name;
+            qf[i].awayteam = awayteams[3 - i].name;
         }
 
         playoffs.quarterfinals = qf;

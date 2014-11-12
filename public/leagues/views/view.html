@@ -5,8 +5,40 @@
 	</div>
 
     <div data-ng-show="!league.groups || league.groups.length">
-        <div ng-repeat="game in league.playoffs.quarterfinals">
-            <p>{{game.hometeam}} vs {{game.awayteam}}</p>
+        <div ng-repeat="match in league.playoffs.quarterfinals">
+            <div>
+                <input date-handler 
+                    match-date="match.date" 
+                    ng-model="match.date" 
+                    ng-model-onblur>
+                {{match.hometeam}} - {{match.awayteam}}
+                <input ng-model="match.homegoals" ng-model-onblur/>
+                <input ng-model="match.awaygoals" ng-model-onblur/>
+            </div>
+        </div>
+
+        <div ng-repeat="match in league.playoffs.semifinals">
+            <div>
+                <input date-handler 
+                    match-date="match.date" 
+                    ng-model="match.date" 
+                    ng-model-onblur>
+                {{match.hometeam}} - {{match.awayteam}}
+                <input ng-model="match.homegoals" ng-model-onblur/>
+                <input ng-model="match.awaygoals" ng-model-onblur/>
+            </div>
+        </div>
+
+        <div ng-repeat="match in league.playoffs.leaguefinal">
+            <div>
+                <input date-handler 
+                    match-date="match.date" 
+                    ng-model="match.date" 
+                    ng-model-onblur>
+                {{match.hometeam}} - {{match.awayteam}}
+                <input ng-model="match.homegoals" ng-model-onblur/>
+                <input ng-model="match.awaygoals" ng-model-onblur/>
+            </div>
         </div>
 
         <div ng-repeat="group in league.groups">
